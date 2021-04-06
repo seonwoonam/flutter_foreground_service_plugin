@@ -87,6 +87,12 @@ public class FlutterForegroundService extends Service {
     }
 
     @Override
+    public void onTaskRemoved() {
+        stopSelf();
+    }
+
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         android.util.Log.d("FlutterForegroundService", "onDestroy");
