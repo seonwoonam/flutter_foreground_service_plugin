@@ -88,6 +88,7 @@ public class FlutterForegroundService extends Service {
 
     @Override
     public void onTaskRemoved() {
+        super.onTaskRemoved();
         stopSelf();
     }
 
