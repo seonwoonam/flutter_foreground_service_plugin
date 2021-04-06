@@ -86,9 +86,9 @@ public class FlutterForegroundService extends Service {
         return START_STICKY;
     }
 
+
     @Override
-    public void onTaskRemoved() {
-        super.onTaskRemoved();
+    public void onTaskRemoved(Intent rootIntent) {
         stopSelf();
     }
 
