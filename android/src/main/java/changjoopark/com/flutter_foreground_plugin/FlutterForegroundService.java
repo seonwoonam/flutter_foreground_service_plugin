@@ -41,7 +41,10 @@ public class FlutterForegroundService extends Service {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
                             "flutter_foreground_service_channel",
-                            NotificationManager.IMPORTANCE_DEFAULT);
+                            NotificationManager.IMPORTANCE_LOW);
+
+                    channel.setVibrationPattern(new long[]{ 0 });
+                    channel.enableVibration(true);
 
                     ((NotificationManager) getSystemService(NOTIFICATION_SERVICE))
                             .createNotificationChannel(channel);
