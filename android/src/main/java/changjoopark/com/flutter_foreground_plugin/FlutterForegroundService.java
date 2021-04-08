@@ -13,6 +13,8 @@ import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
 
+import androidx.annotation.Keep;
+
 @Keep
 public class FlutterForegroundService extends Service {
     public static int ONGOING_NOTIFICATION_ID = 1;
