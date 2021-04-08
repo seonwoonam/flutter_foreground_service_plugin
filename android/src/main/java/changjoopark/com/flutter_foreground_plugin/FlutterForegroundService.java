@@ -13,7 +13,7 @@ import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
 
-
+@Keep
 public class FlutterForegroundService extends Service {
     public static int ONGOING_NOTIFICATION_ID = 1;
     public static final String NOTIFICATION_CHANNEL_ID = "CHANNEL_ID";

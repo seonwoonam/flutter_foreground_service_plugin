@@ -18,6 +18,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 /**
  * FlutterForegroundPlugin
  */
+@Keep
 public class FlutterForegroundPlugin implements MethodCallHandler {
     public final static String START_FOREGROUND_ACTION = "com.changjoopark.flutter_foreground_plugin.action.startforeground";
     public final static String STOP_FOREGROUND_ACTION = "com.changjoopark.flutter_foreground_plugin.action.stopforeground";
