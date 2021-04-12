@@ -1,6 +1,5 @@
 package changjoopark.com.flutter_foreground_plugin;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
@@ -17,6 +17,7 @@ import androidx.annotation.Keep;
 
 @Keep
 public class FlutterForegroundService extends Service {
+    private static String TAG = "FlutterForegroundService";
     public static int ONGOING_NOTIFICATION_ID = 1;
     public static final String NOTIFICATION_CHANNEL_ID = "CHANNEL_ID";
     public static final String ACTION_STOP_SERVICE = "STOP";
@@ -25,11 +26,16 @@ public class FlutterForegroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent.getAction() == null) {
-            return START_STICKY;
+        if (intent == null) {
+            Log.d(TAG, "onStartCommand: Intent is null");
+            return START_NOT_STICKY;
         }
-
+        if (intent.getAction() == null) {
+            Log.d(TAG, "onStartCommand: Intent action is null");
+            return START_NOT_STICKY;
+        }
         final String action = intent.getAction();
+        Log.d(TAG, String.format("onStartCommand: %s", action));
 
         switch (action) {
             case FlutterForegroundPlugin.START_FOREGROUND_ACTION:
@@ -66,7 +72,7 @@ public class FlutterForegroundService extends Service {
                     stopSelf.setAction(ACTION_STOP_SERVICE);
 
                     PendingIntent pStopSelf = PendingIntent
-                            .getService(this, 0, stopSelf ,PendingIntent.FLAG_CANCEL_CURRENT);
+                            .getService(this, 0, stopSelf, PendingIntent.FLAG_CANCEL_CURRENT);
                     builder.addAction(getNotificationIcon(bundle.getString("stop_icon")),
                             bundle.getString("stop_text"),
                             pStopSelf);
@@ -88,7 +94,7 @@ public class FlutterForegroundService extends Service {
                 break;
         }
 
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
 
@@ -101,9 +107,9 @@ public class FlutterForegroundService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        android.util.Log.d("FlutterForegroundService", "onDestroy");
+        Log.d(TAG, "onDestroy");
         if (!userStopForegroundService) {
-            android.util.Log.d("FlutterForegroundService", "User close app, kill current process to avoid memory leak in other plugin.");
+            Log.d(TAG, "User close app, kill current process to avoid memory leak in other plugin.");
             android.os.Process.killProcess(android.os.Process.myPid());
         }
     }
