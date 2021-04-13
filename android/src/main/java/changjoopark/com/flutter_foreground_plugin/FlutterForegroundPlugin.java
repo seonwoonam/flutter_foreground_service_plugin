@@ -38,7 +38,6 @@ public class FlutterForegroundPlugin implements FlutterPlugin, MethodCallHandler
     private Runnable runnable;
     private Handler handler = new Handler(Looper.getMainLooper());
 
-    private FlutterForegroundPlugin() {}
 
     @Override
     public void onAttachedToEngine(FlutterPluginBinding binding) {
