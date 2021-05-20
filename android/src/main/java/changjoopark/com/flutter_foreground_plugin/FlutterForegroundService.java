@@ -65,6 +65,7 @@ public class FlutterForegroundService extends Service {
                         .setCategory(NotificationCompat.CATEGORY_SERVICE)
                         .setContentIntent(pendingIntent)
                         .setUsesChronometer(bundle.getBoolean("chronometer"))
+                        .setSilent(true)
                         .setOngoing(true);
 
                 if (bundle.getBoolean("stop_action")) {
