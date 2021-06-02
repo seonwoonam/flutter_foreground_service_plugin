@@ -99,11 +99,6 @@ public class FlutterForegroundService extends Service {
     }
 
 
-    @Override
-    public void onTaskRemoved(Intent rootIntent) {
-        stopSelf();
-    }
-
 
     @Override
     public void onDestroy() {
